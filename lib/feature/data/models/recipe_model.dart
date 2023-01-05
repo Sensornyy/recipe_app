@@ -9,7 +9,6 @@ class RecipeModel extends RecipeEntity {
   const RecipeModel({
     required super.title,
     required super.calories,
-    required super.thumbnail,
     required super.image,
     required super.ingredients,
   });
