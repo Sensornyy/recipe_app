@@ -30,8 +30,10 @@ class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
 
   @override
   void removeRecipe(String title) {
-    final recipes = recipesBox.get('recipes') as List<RecipeModel>;
+    final recipes = getRecipes();
 
     recipes.removeWhere((recipe) => recipe.title == title);
+
+    saveRecipes(recipes);
   }
 }
