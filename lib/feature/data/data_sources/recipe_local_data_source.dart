@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:hive/hive.dart';
 
 import '../models/recipe_model.dart';
 
