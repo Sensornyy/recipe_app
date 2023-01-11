@@ -10,6 +10,7 @@ import 'package:recipe_app/feature/domain/repositories/recipe_repository.dart';
 import 'package:recipe_app/feature/domain/use_cases/search_recipes_use_case.dart';
 import 'package:recipe_app/feature/presentation/bloc/recipes_bloc.dart';
 
+import 'feature/data/models/recipe_model.dart';
 import 'feature/data/repositories/recipe_repository_impl.dart';
 
 final sl = GetIt.instance;
@@ -31,21 +32,18 @@ Future<void> init() async {
     () => RecipeRemoteDataSourceImpl(http.Client()),
   );
 
-  sl.registerLazySingletonAsync<RecipeLocalDataSource>(
-    () async {
-      await Hive.initFlutter();
-
-      final localDataSource = RecipeLocalDataSourceImpl();
-
-      await localDataSource.init();
-
-      return localDataSource;
-    },
+  sl.registerLazySingleton<RecipeLocalDataSource>(
+    () => RecipeLocalDataSourceImpl(sl()),
   );
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   sl.registerLazySingleton(() => http.Client());
+
+  await Hive.initFlutter();
+  final Box<List<RecipeModel>> recipeBox = await Hive.openBox('recipeBox');
+  recipeBox.put('recipes', <RecipeModel>[]);
+  sl.registerLazySingleton(() => recipeBox);
 
   sl.registerLazySingleton(() => InternetConnectionChecker());
 }
