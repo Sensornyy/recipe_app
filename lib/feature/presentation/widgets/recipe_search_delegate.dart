@@ -49,7 +49,8 @@ class RecipeSearchDelegate extends SearchDelegate {
               mainAxisSpacing: 20),
           itemCount: recipes.length,
           itemBuilder: (BuildContext ctx, index) {
-            return RecipeCard(recipes[index]);
+            final sortedRecipes = recipes..sort((recipe1, recipe2) => recipe2.calories.compareTo(recipe1.calories));
+            return RecipeCard(sortedRecipes[index]);
           },
         );
       }

@@ -9,4 +9,8 @@ class SearchRecipesUseCase {
   Future<List<RecipeEntity>> call(String query) async {
     return await _recipeRepository.searchRecipes(query);
   }
+
+  List<RecipeEntity> getRecipes() {
+    return _recipeRepository.getRecipes();
+  }
 }

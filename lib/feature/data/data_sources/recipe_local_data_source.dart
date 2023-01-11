@@ -12,15 +12,9 @@ abstract class RecipeLocalDataSource {
 }
 
 class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
-   Box<List<RecipeModel>> recipesBox;
-
+   final Box<List<RecipeModel>> recipesBox;
 
    RecipeLocalDataSourceImpl(this.recipesBox);
-
-  Future<void> init() async {
-    recipesBox = await Hive.openBox('recipesBox');
-
-  }
 
   @override
   List<RecipeModel> getRecipes() {

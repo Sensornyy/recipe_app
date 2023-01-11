@@ -17,7 +17,7 @@ class RecipesList extends StatelessWidget {
         if (state is RecipesLoading) {
           return const LoadingIndicator();
         } else if (state is RecipesLoaded) {
-          recipes = state.recipes;
+          recipes = state.recipes..sort((recipe1, recipe2) => recipe2.calories.compareTo(recipe1.calories));
         }
 
         return GridView.builder(

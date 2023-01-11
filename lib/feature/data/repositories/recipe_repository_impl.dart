@@ -24,4 +24,9 @@ class RecipeRepositoryImpl extends RecipeRepository {
      return localDataSource.getRecipes();
     }
   }
+
+  @override
+  List<RecipeEntity> getRecipes() {
+    return localDataSource.getRecipes();
+  }
 }

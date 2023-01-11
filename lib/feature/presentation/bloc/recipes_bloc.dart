@@ -19,5 +19,11 @@ class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
 
       emit(RecipesLoaded(recipes));
     });
+
+    on<GetRecipesEvent>((event, emit) {
+      emit(RecipesLoading());
+      final recipes = searchRecipes.getRecipes();
+      emit(RecipesLoaded(recipes));
+    });
   }
 }
