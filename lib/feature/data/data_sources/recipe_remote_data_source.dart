@@ -24,7 +24,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
       final recipes = json.decode(response.body);
 
       return (recipes['hits'] as List)
-          .map((recipe) => RecipeModel.fromJson(recipe))
+          .map((recipe) => RecipeModel.fromJson(recipe['recipe']))
           .toList();
     } else {
       throw Exception();

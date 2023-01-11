@@ -1,23 +1,23 @@
 import 'package:equatable/equatable.dart';
 
 class RecipeEntity extends Equatable {
-  final String title;
+  final String label;
   final int calories;
   final String image;
-  final List<String> ingredients;
+  final List<String> ingredientLines;
 
   const RecipeEntity({
-    required this.title,
+    required this.label,
     required this.calories,
     required this.image,
-    required this.ingredients,
+    required this.ingredientLines,
   });
 
   @override
   List<Object> get props => [
-        title,
+        label,
         calories,
         image,
-        ingredients,
+        ingredientLines,
       ];
 }

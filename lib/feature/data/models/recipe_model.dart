@@ -7,10 +7,10 @@ part 'recipe_model.g.dart';
 @JsonSerializable()
 class RecipeModel extends RecipeEntity {
   const RecipeModel({
-    required super.title,
+    required super.label,
     required super.calories,
     required super.image,
-    required super.ingredients,
+    required super.ingredientLines,
   });
 
   factory RecipeModel.fromJson(Map<String, dynamic> json) => _$RecipeModelFromJson(json);

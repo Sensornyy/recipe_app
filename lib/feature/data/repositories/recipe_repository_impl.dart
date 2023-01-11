@@ -13,20 +13,15 @@ class RecipeRepositoryImpl extends RecipeRepository {
   RecipeRepositoryImpl({
     required this.networkInfo,
     required this.remoteDataSource,
-    required this.localDataSource,
+   required this.localDataSource,
   });
-
-  @override
-  Future<List<RecipeEntity>> getRecipes() async {
-    return searchRecipes('salad');
-  }
 
   @override
   Future<List<RecipeEntity>> searchRecipes(String query) async {
     if (await networkInfo.isConnected) {
       return await remoteDataSource.searchRecipes(query);
     } else {
-      return localDataSource.getRecipes();
+     return localDataSource.getRecipes();
     }
   }
 }

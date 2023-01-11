@@ -12,11 +12,14 @@ abstract class RecipeLocalDataSource {
 }
 
 class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
-  late Box<List<RecipeModel>> recipesBox;
+   Box<List<RecipeModel>> recipesBox;
+
+
+   RecipeLocalDataSourceImpl(this.recipesBox);
 
   Future<void> init() async {
     recipesBox = await Hive.openBox('recipesBox');
-    recipesBox.put('recipes', <RecipeModel>[]);
+
   }
 
   @override
@@ -30,10 +33,10 @@ class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
   }
 
   @override
-  void removeRecipe(String title) {
+  void removeRecipe(String label) {
     final recipes = getRecipes();
 
-    recipes.removeWhere((recipe) => recipe.title == title);
+    recipes.removeWhere((recipe) => recipe.label == label);
 
     saveRecipes(recipes);
   }
