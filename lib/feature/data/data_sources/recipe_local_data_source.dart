@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:hive/hive.dart';
 
 import '../models/recipe_model.dart';
 
@@ -11,12 +12,9 @@ abstract class RecipeLocalDataSource {
 }
 
 class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
-  late Box<List<RecipeModel>> recipesBox;
+   final Box<List<RecipeModel>> recipesBox;
 
-  Future<void> init() async {
-    recipesBox = await Hive.openBox('recipesBox');
-    recipesBox.put('recipes', <RecipeModel>[]);
-  }
+   RecipeLocalDataSourceImpl(this.recipesBox);
 
   @override
   List<RecipeModel> getRecipes() {
@@ -29,10 +27,10 @@ class RecipeLocalDataSourceImpl implements RecipeLocalDataSource {
   }
 
   @override
-  void removeRecipe(String title) {
+  void removeRecipe(String label) {
     final recipes = getRecipes();
 
-    recipes.removeWhere((recipe) => recipe.title == title);
+    recipes.removeWhere((recipe) => recipe.label == label);
 
     saveRecipes(recipes);
   }
